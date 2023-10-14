@@ -41,11 +41,11 @@ export default function Signout() {
               className="inputtxt mb-4"
               required
             />
-            <button className="button3 uppercase">CREATE account</button>
-            <button className="button2 bg-[#DB4437]">
+            <button className="button3 uppercase shadow-md hover:opacity-80 smooth">CREATE account</button>
+            <button className="button2 bg-[#DB4437] shadow-md hover:opacity-80 smooth">
               Continue With Google
             </button>
-            <button className="button2 bg-[#4267B2]">
+            <button className="button2 bg-[#4267B2] shadow-md hover:opacity-80 smooth">
               Continue With Facebook
             </button>
           </form>

@@ -27,9 +27,9 @@ export default function Signin() {
               className="inputtxt mb-4"
               required
             />
-            <button className="button1">LOG IN</button>
-            <button className="button2 bg-[#DB4437]">Sign with Google</button>
-            <button className="button2 bg-[#4267B2]">Sign with Facebook</button>
+            <button className="button1 shadow-md hover:opacity-80 smooth">LOG IN</button>
+            <button className="button2 bg-[#DB4437] shadow-md hover:opacity-80 smooth">Sign with Google</button>
+            <button className="button2 bg-[#4267B2] shadow-md hover:opacity-80 smooth">Sign with Facebook</button>
             <p className="text-center py-3">Forgot password?</p>
           </form>
           <div className="flex w-full justify-between items-center">

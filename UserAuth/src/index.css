@@ -49,8 +49,11 @@
 .button3{
   @apply gradient2 ;
 }
-.button1 , .button2 , .button3{
-  @apply text-white  px-3 py-1 rounded-md shadow-md hover:opacity-80 smooth;
+.button3 , .button2 , .button1{
+  border-radius: 0.375rem;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
 }
 .inputtxt{
   @apply focus:outline-none border-2 rounded-md py-1 px-3 ;
