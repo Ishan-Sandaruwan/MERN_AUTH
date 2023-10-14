@@ -82,7 +82,10 @@ export default function Header() {
                 className={`font-medium cursor-pointer text-[16px] ${
                   active === nav.title ? "text-white" : "text-slate-400"
                 } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
-                onClick={() => setActive(nav.title)}
+                onClick={() => {
+                  setActive(nav.title);
+                  setToggle(!toggle);
+                }}
               >
                 <Link to={nav.id}>
                   <p>{nav.title}</p>

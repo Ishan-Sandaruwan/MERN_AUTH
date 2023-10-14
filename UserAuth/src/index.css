@@ -5,44 +5,53 @@
 @tailwind utilities;
 
 :root {
-  font-family: Poppins, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Poppins, sans-serif;
+  --primary-color: #ff33b4;
+  --secondary-color: #5733ff;
+  --accent-color-1: #05cc01;
+  --accent-color-2: #e0e002;
 }
 .gradient1 {
-  background: linear-gradient(
-    90deg,
-    #ff33b4, /* First color (left) */  
-    #5733ff /* Third color (right) */
-  );
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
 }
-
+.gradient2 {
+  background: linear-gradient(120deg, var(--accent-color-1), var(--accent-color-2));
+}
 .toMid{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .gradient-text {
-  background: linear-gradient(to right, #ff33b4, #5733FF);
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
   background-clip: text;
   color: transparent;
-  /* You can adjust other text properties as needed */
 }
-
+.gradient-text2 {
+  background: linear-gradient(to right, var(--accent-color-1), var(--accent-color-2));
+  background-clip: text;
+  color: transparent;
+}
 .smooth{
   transition: all 0.2s linear;
 }
 
 .gradient-border {
-  border-image: linear-gradient(to right, #ff33b4, #5733FF) 10;
+  border-image: linear-gradient(to right, var(--primary-color), var(--secondary-color)) 10;
+}
+.gradient-border2 {
+  border-image: linear-gradient(to right, var(--accent-color-1), var(--accent-color-2)) 10;
 }
 
 .button1{
-  @apply gradient1 text-white px-3 py-1 rounded-md shadow-md hover:opacity-80 smooth;
+  @apply gradient1 ;
 }
-.button2{
-  @apply text-white px-3 py-1 rounded-md shadow-md hover:opacity-80 smooth;
+.button3{
+  @apply gradient2 ;
 }
-
+.button1 , .button2 , .button3{
+  @apply text-white  px-3 py-1 rounded-md shadow-md hover:opacity-80 smooth;
+}
 .inputtxt{
   @apply focus:outline-none border-2 rounded-md py-1 px-3 ;
 }

@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Signin() {
+  const navigate = useNavigate();
   return (
     <div className="bg-slate-100 toMid w-full min-h-screen p-3">
       <div className="bg-white rounded-md shadow-md sm:max-w-5xl max-w-md flex sm:flex-row flex-col">
@@ -15,12 +18,14 @@ export default function Signin() {
               type="text"
               name="username"
               className="inputtxt mt-2"
+              required
             />
             <input
               placeholder="Password"
               type="text"
               name="Password"
               className="inputtxt mb-4"
+              required
             />
             <button className="button1">LOG IN</button>
             <button className="button2 bg-[#DB4437]">Sign with Google</button>
@@ -29,7 +34,7 @@ export default function Signin() {
           </form>
           <div className="flex w-full justify-between items-center">
             <p>Don&apos;t have an account</p>
-            <button className="border-2 gradient-border gradient-text px-2 py-1 hover:opacity-80 smooth">
+            <button className="border-2 gradient-border gradient-text px-2 py-1 hover:opacity-80 smooth" onClick={()=>navigate('/signout')}>
               REGISTER
             </button>
           </div>
