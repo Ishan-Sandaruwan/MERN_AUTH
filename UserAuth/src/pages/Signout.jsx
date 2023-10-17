@@ -5,7 +5,7 @@ import axios from "axios";
 export default function Signout() {
   const navigate = useNavigate();
   const [formData, setFromData] = useState({});
-  const [error, setError] = useState("y");
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {

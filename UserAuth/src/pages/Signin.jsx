@@ -1,7 +1,33 @@
+import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Signin() {
   const navigate = useNavigate();
+  const [formData, setFromData] = useState({});
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFromData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      setLoading(true);
+      await axios.post("/api/auth/signin", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setLoading(false);
+      navigate("/");
+    } catch (error) {
+      setLoading(false);
+      setError(error.response.data.message);
+    }
+  };
   return (
     <div className="bg-slate-100 toMid w-full min-h-screen p-3">
       <div className="bg-white rounded-md shadow-md sm:max-w-5xl max-w-md flex sm:flex-row flex-col">
@@ -11,30 +37,48 @@ export default function Signin() {
               We are the lotus team
             </h2>
           </div>
-          <form className="flex flex-col w-full gap-2 m-1">
+          <form
+            className="flex flex-col w-full gap-2 m-1"
+            onSubmit={handleSubmit}
+          >
             <label>Please login to your account</label>
             <input
-              placeholder="Username"
+              placeholder="Email"
               type="text"
-              name="username"
+              name="email"
               className="inputtxt mt-2"
               required
+              onChange={handleChange}
             />
             <input
               placeholder="Password"
               type="text"
-              name="Password"
+              name="password"
               className="inputtxt mb-4"
               required
+              onChange={handleChange}
             />
-            <button className="button1 shadow-md hover:opacity-80 smooth">LOG IN</button>
-            <button className="button2 bg-[#DB4437] shadow-md hover:opacity-80 smooth">Sign with Google</button>
-            <button className="button2 bg-[#4267B2] shadow-md hover:opacity-80 smooth">Sign with Facebook</button>
+            <button
+              className="button1 shadow-md hover:opacity-80 smooth"
+              disabled={loading}
+            >
+              {loading ? `Loading...` : `LOG IN`}
+            </button>
+            {error && <p className="text-red-600 text-sm">{error}</p>}
+            <button className="button2 bg-[#DB4437] shadow-md hover:opacity-80 smooth">
+              Sign with Google
+            </button>
+            <button className="button2 bg-[#4267B2] shadow-md hover:opacity-80 smooth">
+              Sign with Facebook
+            </button>
             <p className="text-center py-3">Forgot password?</p>
           </form>
           <div className="flex w-full justify-between items-center">
             <p>Don&apos;t have an account</p>
-            <button className="border-2 gradient-border gradient-text px-2 py-1 hover:opacity-80 smooth" onClick={()=>navigate('/signout')}>
+            <button
+              className="border-2 gradient-border gradient-text px-2 py-1 hover:opacity-80 smooth"
+              onClick={() => navigate("/signout")}
+            >
               REGISTER
             </button>
           </div>
