@@ -1,7 +1,34 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Signout() {
   const navigate = useNavigate();
+  const [formData, setFromData] = useState({});
+  const [error, setError] = useState("y");
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFromData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      setLoading(true);
+      await axios.post("/api/auth/signup", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setLoading(false);
+      navigate("/signin");
+    } catch (error) {
+      setLoading(false);
+      setError(error.response.data.message);
+    }
+  };
+
   return (
     <div className="bg-slate-100 toMid w-full min-h-screen p-3">
       <div className="bg-white rounded-md shadow-md sm:max-w-5xl max-w-md flex sm:flex-row flex-col">
@@ -11,7 +38,10 @@ export default function Signout() {
               We are the lotus team
             </h2>
           </div>
-          <form className="flex flex-col w-full gap-2 m-1">
+          <form
+            className="flex flex-col w-full gap-2 m-1"
+            onSubmit={handleSubmit}
+          >
             <label>Please cretae your account</label>
             <input
               placeholder="Username"
@@ -19,6 +49,7 @@ export default function Signout() {
               name="username"
               className="inputtxt mt-2"
               required
+              onChange={handleChange}
             />
             <input
               placeholder="email"
@@ -26,6 +57,7 @@ export default function Signout() {
               name="email"
               className="inputtxt "
               required
+              onChange={handleChange}
             />
             <input
               placeholder="Password"
@@ -33,6 +65,7 @@ export default function Signout() {
               name="password"
               className="inputtxt "
               required
+              onChange={handleChange}
             />
             <input
               placeholder="Comfirm Password"
@@ -40,8 +73,16 @@ export default function Signout() {
               name="comfirmPassword"
               className="inputtxt mb-4"
               required
+              onChange={handleChange}
             />
-            <button className="button3 uppercase shadow-md hover:opacity-80 smooth">CREATE account</button>
+
+            <button
+              className="button3 uppercase shadow-md hover:opacity-80 smooth"
+              disabled={loading}
+            >
+              {loading ? `Loading...` : `CREATE account`}
+            </button>
+            {error && <p className="text-red-600 text-sm">{error}</p>}
             <button className="button2 bg-[#DB4437] shadow-md hover:opacity-80 smooth">
               Continue With Google
             </button>
@@ -51,7 +92,10 @@ export default function Signout() {
           </form>
           <div className="flex w-full justify-between items-center">
             <p>Do You have an account</p>
-            <button className="border-2 gradient-border2 gradient-text2 px-2 py-1 hover:opacity-80 smooth" onClick={()=>navigate('/signin')}>
+            <button
+              className="border-2 gradient-border2 gradient-text2 px-2 py-1 hover:opacity-80 smooth"
+              onClick={() => navigate("/signin")}
+            >
               LOGIN
             </button>
           </div>
