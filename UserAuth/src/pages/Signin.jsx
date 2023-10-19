@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice.js';
+import OAuth from "../components/OAuth.jsx";
 
 export default function Signin() {
 
@@ -66,9 +67,7 @@ export default function Signin() {
               {loading ? `Loading...` : `LOG IN`}
             </button>
             {error && <p className="text-red-600 text-sm">{error}</p>}
-            <button className="button2 bg-[#DB4437] shadow-md hover:opacity-80 smooth">
-              Sign with Google
-            </button>
+            <OAuth/>
             <button className="button2 bg-[#4267B2] shadow-md hover:opacity-80 smooth">
               Sign with Facebook
             </button>
