@@ -5,6 +5,17 @@ import jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
+   let emailExists;
+      try {
+           emailExists = await User.findOne({email :  email.toLowerCase()});
+      } catch (error) {
+        return next(errorHandler(500, "Something went wrong"));
+      }
+
+      if(emailExists?.email)
+      {
+        return next(errorHandler(409, "user with this email already exists "));
+      }
   const hashPassword = bcryptjs.hashSync(password, 10);
   const newUser = new User({ username, email, password: hashPassword });
   try {
@@ -18,7 +29,7 @@ export const signup = async (req, res, next) => {
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    const validUser = await User.findOne({ email: email });
+    const validUser = await User.findOne({ email: email.toLowerCase() });
     if (!validUser) return next(errorHandler(404, "user not found "));
     const validPassword = bcryptjs.compareSync(password, validUser.password);
     if (!validPassword) return next(errorHandler(401, "Wrong credintial !!!"));
