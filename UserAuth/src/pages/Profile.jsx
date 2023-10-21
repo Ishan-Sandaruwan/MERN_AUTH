@@ -1,4 +1,7 @@
+import { useSelector } from "react-redux";
+
 export default function Profile() {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <div className="">
       <div className="p-3 max-w-lg sm:max-w-xl mx-auto min-h-[90vh] flex flex-col justify-between gap-4 ">
@@ -13,7 +16,7 @@ export default function Profile() {
         /> */}
           <img
             // onClick={() => fileRef.current.click()}
-            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60"
+            src={currentUser.avator}
             alt="profile"
             className="rounded-full h-24 w-24 sm:h-32 sm:w-32 object-cover cursor-pointer self-center mt-2"
           />
