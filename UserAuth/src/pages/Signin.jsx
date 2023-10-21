@@ -77,7 +77,7 @@ export default function Signin() {
             <p>Don&apos;t have an account</p>
             <button
               className="border-2 gradient-border gradient-text px-2 py-1 hover:opacity-80 smooth"
-              onClick={() => navigate("/signout")}
+              onClick={() => navigate("/signup")}
             >
               REGISTER
             </button>

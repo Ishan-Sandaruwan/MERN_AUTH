@@ -13,8 +13,8 @@ export default function Header() {
       title: "Signin",
     },
     {
-      id: "signout",
-      title: "Signout",
+      id: "signup",
+      title: "Signup",
     },
     {
       id: "profile",
