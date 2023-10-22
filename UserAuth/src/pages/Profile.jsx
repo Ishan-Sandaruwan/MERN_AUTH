@@ -11,6 +11,9 @@ import {
   updateUserStart,
   updateUserFailure,
   updateUserSuccess,
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
 } from "../redux/user/userSlice.js";
 import axios from "axios";
 
@@ -84,6 +87,18 @@ export default function Profile() {
       dispatch(updateUserFailure(error.response.data.message));
     }
   };
+
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const result = await axios.delete(`/api/user/delete/${currentUser._id}`);
+      console.log(result.data);
+      dispatch(deleteUserSuccess());
+    } catch (error) {
+      dispatch(deleteUserFailure(error.response.data.message));
+    }
+  };
+
   return (
     <div className="">
       <div className="p-3 max-w-lg sm:max-w-xl mx-auto min-h-[90vh] flex flex-col justify-between gap-4 ">
@@ -154,7 +169,10 @@ export default function Profile() {
         <div className="flex flex-col text-red-600 ">
           <p className="font-bold">Danger ZONE</p>
           <div className="flex justify-between mt-4">
-            <span className=" cursor-pointer smooth hover:font-bold ">
+            <span
+              className=" cursor-pointer smooth hover:font-bold "
+              onClick={handleDeleteUser}
+            >
               Delete account
             </span>
             <span className="cursor-pointer smooth hover:font-bold ">
