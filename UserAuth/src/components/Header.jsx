@@ -38,10 +38,10 @@ export default function Header() {
         {navLinks.map((nav, index) => (
           <React.Fragment key={nav.id}>
             {nav.title === "Signin" && currentUser ? (
-              <div className="text-slate-400 overflow-hidden">
+              <div className="text-slate-400 overflow-hidden ">
                 <Link to="/profile">
                   <img
-                    className="h-9 object-cover"
+                    className="h-9 object-cover rounded-full"
                     src={currentUser.avator}
                     alt="profile"
                   />
@@ -89,10 +89,10 @@ export default function Header() {
             {navLinks.map((nav, index) => (
               <React.Fragment key={nav.id}>
                 {nav.title === "Signin" && currentUser ? (
-                  <div className="text-slate-400 overflow-hidden w-full flex justify-end ">
+                  <div className="text-slate-400 overflow-hidden w-full ">
                     <Link to="/profile">
                       <img
-                        className="h-11 object-cover"
+                        className="h-11 object-cover rounded-full"
                         src={currentUser.avator}
                         alt="profile"
                       />
